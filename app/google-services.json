@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "195376297449",
+    "firebase_url": "https://synergycombat-b982e-default-rtdb.firebaseio.com",
+    "project_id": "synergycombat-b982e",
+    "storage_bucket": "synergycombat-b982e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195376297449:android:03810b9ecdc8420b148778",
+        "android_client_info": {
+          "package_name": "com.example.phoenixkickboxing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195376297449-n2d8utd9514bb2jvbqeg9v53rvoejo17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlcuTIy_R2wDpETEzWjraZDbdonKi42LY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195376297449-n2d8utd9514bb2jvbqeg9v53rvoejo17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195376297449:android:c0377efdc3ec6549148778",
+        "android_client_info": {
+          "package_name": "com.example.xbcadapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195376297449-n2d8utd9514bb2jvbqeg9v53rvoejo17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlcuTIy_R2wDpETEzWjraZDbdonKi42LY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195376297449-n2d8utd9514bb2jvbqeg9v53rvoejo17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

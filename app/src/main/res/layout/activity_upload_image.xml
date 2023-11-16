@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/AppBackground"
+    android:orientation="vertical"
+    tools:context=".UploadImage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/backButton"
+            android:padding="14dp"
+            android:src="@drawable/back_button"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headerUploadImage"
+            android:layout_centerInParent="true"
+            android:text="Upload Images"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="210dp"
+            android:id="@+id/uploadImageLayout"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/round_back_white10_20"
+            android:padding="15dp"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/uploadImage"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/upload"
+                />
+
+
+
+        </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUploadPhoto"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round_back_white10_20"
+        android:gravity="center"
+        android:text="Upload Image"
+
+
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+</LinearLayout>

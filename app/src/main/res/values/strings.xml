@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PhoenixKickboxing</string>
+    <string name="club_email">pheonixkickboxing01@gmail.com</string>
+    <dimen name="image_margin_top">16dp</dimen>
+</resources>
