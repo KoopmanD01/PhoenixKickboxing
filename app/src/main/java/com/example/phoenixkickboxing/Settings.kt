@@ -184,7 +184,7 @@ class Settings : AppCompatActivity() {
         }
 
     }
-
+//
     private fun createNewProfile(selectedImageUri: Uri) {
         val user = userId.currentUser
         if (user != null) {
