@@ -11,12 +11,13 @@ class SessionCleanupService : IntentService("SessionCleanupService") {
     private val cleanupIntervalMillis = 7 * 24 * 60 * 60 * 1000 // 2 minutes
     private val oneDaysInMillis = 1 * 24 * 60 * 60 * 1000
 
-    // Define a Runnable to perform the cleanup
+
+    // Define a Runnable to perform the cleanupSessions
     private val cleanupRunnable = object : Runnable {
         override fun run() {
             val database: FirebaseDatabase = FirebaseDatabase.getInstance()
             val sessionsRef: DatabaseReference = database.getReference("Sessions")
-
+            val pastSessionsRef: DatabaseReference = database.getReference("PastSessions")
             val currentTimeInMillis = System.currentTimeMillis()
 
             sessionsRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -25,11 +26,17 @@ class SessionCleanupService : IntentService("SessionCleanupService") {
                         val sessionDate = sessionSnapshot.key
                         if (!sessionDate.isNullOrEmpty()) {
                             try {
-                                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                                val dateFormat =
+                                    SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                                 val creationDate = dateFormat.parse(sessionDate)
                                 val creationTimeInMillis = creationDate?.time ?: 0
 
                                 if (creationTimeInMillis < (currentTimeInMillis - oneDaysInMillis)) {
+                                    // Move the session to "PastSessions" reference
+                                    val movedSession = sessionSnapshot.value
+                                    pastSessionsRef.child(sessionDate).setValue(movedSession)
+
+                                    // Remove the session from "Sessions" reference
                                     sessionSnapshot.ref.removeValue()
                                 }
                             } catch (e: Exception) {
