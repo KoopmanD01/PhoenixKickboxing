@@ -80,6 +80,7 @@ class LogIn : AppCompatActivity() {
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Handle any errors here
+                // The errors here could be handled in many different ways
             }
         })
     }
