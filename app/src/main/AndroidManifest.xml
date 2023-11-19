@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhoenixKickboxing"
         tools:targetApi="31">
+        <activity
+            android:name=".AdminSearchPastSessions"
+            android:exported="false" />
+
         <service android:name=".SessionCleanupService" />
 
         <activity
