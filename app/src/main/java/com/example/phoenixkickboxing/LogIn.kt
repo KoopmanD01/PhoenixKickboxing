@@ -21,8 +21,6 @@ class LogIn : AppCompatActivity() {
         binding = ActivityLogInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val intent = Intent(this, SessionCleanupService::class.java)
-        startService(intent)
 
         dbAuthSynergy = FirebaseAuth.getInstance()
 

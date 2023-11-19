@@ -1,6 +1,7 @@
 package com.example.phoenixkickboxing
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,9 @@ class AdminSearchPastSessions : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminSearchPastSessionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val intent = Intent(this, SessionCleanupService::class.java)
+        startService(intent)
 
         recyclerView = findViewById(R.id.recyclerView)
         pastSessionsAdapter = PastSessionsAdapter()
@@ -49,6 +53,7 @@ class AdminSearchPastSessions : AppCompatActivity() {
                     .format(Date(year - 1900, month, dayOfMonth))
 
                 // Query the past sessions for the selected date
+                binding.dateLabel.text = "Selected Date: " + selectedDate
                 queryPastSessions(selectedDate)
             },
             calendar.get(Calendar.YEAR),

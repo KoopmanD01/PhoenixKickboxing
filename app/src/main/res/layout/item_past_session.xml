@@ -9,6 +9,9 @@
     <TextView
         android:id="@+id/sessionDateTextView"
         android:layout_width="match_parent"
+        android:gravity="center"
+        android:backgroundTint="@color/white"
         android:layout_height="wrap_content"
         android:textSize="18sp"/>
+
 </LinearLayout>
