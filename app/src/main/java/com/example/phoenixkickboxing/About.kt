@@ -22,7 +22,7 @@ import java.io.IOException
 import java.net.URL
 
 class About : AppCompatActivity() {
-    private val userId = FirebaseAuth.getInstance()
+    private val userId = FirebaseAuth.getInstance()                                  //User credentials are retrieved via the firebase database
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val staffEmails: MutableList<String> = mutableListOf()
 
