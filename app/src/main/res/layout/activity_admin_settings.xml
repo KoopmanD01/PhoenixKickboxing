@@ -216,6 +216,53 @@
 
                 </RelativeLayout>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/round_back_white10_20"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:padding="15dp">
+
+                <!-- Edit Account & Details -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/changeTime"
+                    >
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:id="@+id/timeUpdate"
+                        android:src="@drawable/baseline_time"
+                        android:background="@color/buttonsColor"
+                        android:padding="12dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Update Time"
+                        android:layout_marginStart="20dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        android:layout_toEndOf="@id/timeUpdate"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/right_arrow_icon"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
