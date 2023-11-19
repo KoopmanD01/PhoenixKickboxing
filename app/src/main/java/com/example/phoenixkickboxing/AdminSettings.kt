@@ -50,7 +50,9 @@ class AdminSettings : AppCompatActivity() {
         binding.btnPhoto.setOnClickListener {
             openGallery()
         }
-
+        binding.SearchSessions.setOnClickListener {
+            ClassIntent(this, AdminSearchPastSessions::class.java)
+        }
         binding.addAdmin.setOnClickListener {
             ClassIntent(this, AddAdmin::class.java)
         }
