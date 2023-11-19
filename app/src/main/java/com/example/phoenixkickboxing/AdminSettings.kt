@@ -64,6 +64,11 @@ class AdminSettings : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             handleBackButtonClick()
         }
+
+        binding.changeTime.setOnClickListener(){
+
+            ClassIntent(this, AdminChangeTime::class.java)
+        }
     }
 
     private fun handleBackButtonClick() {
