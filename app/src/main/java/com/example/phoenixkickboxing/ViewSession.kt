@@ -37,75 +37,60 @@ class ViewSession : AppCompatActivity() {
         if(currentuser != null){
 
             val currentUserUid = currentuser.uid.toString()
-            val currentDate = LocalDate.now()
+
 
             myRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if(dataSnapshot.exists()) {
+                    if (dataSnapshot.exists()) {
                         for (childSnapshot in dataSnapshot.children) {
-                            val key = childSnapshot.key // This retrieves the key
-                            // Get the session data from the childSnapshot
+                            val key = childSnapshot.key
                             val sessionData = childSnapshot.value as Map<String, Any>?
-                            val name = sessionData?.keys
+                            val uid = sessionData?.keys
+                            val values = sessionData?.values
+                            val uid2 = uid?.firstOrNull() // Assuming there's only one UID per session
 
+                            if (uid2 != null && currentUserUid == uid2.toString()) {
+                                val name = values?.firstOrNull() // Assuming there's only one name per session
+                                val rowData = arrayOf(key, name.toString())
 
-                            val uid2 = sessionData?.get(currentuser.displayName.toString())
-                                ?.let { userData ->
-                                    if (userData is Map<*, *>) {
-                                        userData["uid"].toString()
-                                    } else {
-                                        null
-                                    }
-                                }
+                                // Display the name using a Toast
+                                val row = TableRow(this@ViewSession)
+                                val layoutParams = TableLayout.LayoutParams(
+                                    TableLayout.LayoutParams.MATCH_PARENT,
+                                    TableLayout.LayoutParams.MATCH_PARENT
+                                )
+                                row.layoutParams = layoutParams
 
-                            if (uid2 != null) {
-                                if (currentUserUid.equals(uid2.toString())) {
-                                    val rowData = arrayOf(
-                                        key.toString()
-                                    )
+                                // Create a LocalDate instance
+                                val localDate = LocalDate.now() // Current local date
 
-                                    // Display the name using a Toast
-                                    val row = TableRow(this@ViewSession)
-                                    val layoutParams = TableLayout.LayoutParams(
-                                        TableLayout.LayoutParams.MATCH_PARENT,
-                                        TableLayout.LayoutParams.MATCH_PARENT
-                                    )
-                                    row.layoutParams = layoutParams
+                                val pattern = "yyyy-MM-dd"
+                                val formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault())
 
-                                    // Create a LocalDate instance
-                                    val localDate = LocalDate.now() // Current local date
+                                val formattedDate = localDate.format(formatter)
+                                readTimeSlotsForDate(formattedDate)
 
-                                    val pattern = "yyyy-MM-dd"
-                                    val formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault())
+                                for (i in rowData.indices) {
+                                    val cell = TextView(this@ViewSession)
+                                    cell.text = rowData[i]
 
-                                    val formattedDate = localDate.format(formatter)
-
-                                    for (i in rowData.indices) {
-                                        val cell = TextView(this@ViewSession)
-                                        cell.text = rowData[i]
-
-                                        if(key.toString() == formattedDate){
-                                            cell.setBackgroundColor(Color.parseColor("#00FF00"))
-                                        }
-
-                                        cell.setPadding(50, 16, 50, 16)
-                                        cell.gravity = Gravity.CENTER
-                                        row.addView(cell)
+                                    if (key.toString() == formattedDate) {
+                                        cell.setBackgroundColor(Color.parseColor("#00FF00"))
                                     }
 
-                                    binding.tableLayoutView.addView(row)
-
-
+                                    cell.setPadding(50, 16, 50, 16)
+                                    cell.gravity = Gravity.CENTER
+                                    row.addView(cell)
                                 }
+
+                                binding.tableLayoutView.addView(row)
                             }
-
-
                         }
-                    }
-                    else{
-                        Toast.makeText(this@ViewSession,"No bookings",Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@ViewSession, "No bookings", Toast.LENGTH_SHORT).show()
                     }
                 }
+
 
                 override fun onCancelled(databaseError: DatabaseError) {
                     Toast.makeText(this@ViewSession,"Error",Toast.LENGTH_SHORT).show()
@@ -123,5 +108,33 @@ class ViewSession : AppCompatActivity() {
         }
     }
     //------------------------------------------------------------------------------------------------------//
+    private fun readTimeSlotsForDate(selectedDate: String) {
+        val timeSlotsRef: DatabaseReference = database.getReference("timeslot").child(selectedDate)
+
+        val timeSlotsList = mutableListOf<String>()
+
+        timeSlotsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (timeSlotSnapshot in dataSnapshot.children) {
+                    val timeSlot = timeSlotSnapshot.value.toString()
+                    timeSlotsList.add(timeSlot)
+                }
+
+                if (timeSlotsList.isNotEmpty()) {
+                    // Assuming you want to display all time slots, you can join them into a single string
+                    val allTimes = timeSlotsList.joinToString(", ")
+                    binding.timeLabel.text = "Todays session times: $allTimes"
+                } else {
+                    binding.timeLabel.text = "Todays session times: 19:00"
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle any errors here
+            }
+        })
+    }
+
+
 
 }
