@@ -35,7 +35,9 @@ class LogIn : AppCompatActivity() {
             val email = binding.txtUsername.text.toString()
             val password = binding.txtPassword.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
+            // Validate login input before attempting to sign in
+            if (ValidatorClass.validateLoginInput(email, password)) {
+                // Your existing code for Firebase authentication
                 dbAuthSynergy.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
@@ -61,6 +63,7 @@ class LogIn : AppCompatActivity() {
                 Toast.makeText(this, "Enter both email and password for login", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     fun getEmails() {
