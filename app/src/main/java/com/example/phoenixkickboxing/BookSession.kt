@@ -20,6 +20,7 @@ class BookSession : AppCompatActivity() {
     private val databaseEmail: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val bookedDates: MutableList<String> = mutableListOf()
 
+    private var timeSlot: String =""
     private var day: String = ""
     private var date: String = ""
     private val database = Firebase.database
@@ -51,10 +52,14 @@ class BookSession : AppCompatActivity() {
 
                 val displayText = "$dayOfWeek\n $formattedDate"
                 binding.dateLabel.text = displayText
+
+                // Call readTimeSlotsForDate here after setting the date
+
             } else {
                 Toast.makeText(this, "Date has already passed", Toast.LENGTH_SHORT).show()
             }
         }
+
 
         binding.backButton.setOnClickListener {
             handleBackButtonClick()
@@ -76,15 +81,14 @@ class BookSession : AppCompatActivity() {
                         myRef1 = myRef1.child(date)
                     }
                     if (userEmail != null) {
-                        val sessionData = mapOf(
-                            "uid" to user.uid.toString()
-                        )
 
-                        val newChildRef = myRef1.child(user.displayName.toString())
-                        newChildRef.setValue(sessionData)
+
+                        val newChildRef = myRef1.child(user.uid.toString())
+                        newChildRef.setValue(user.displayName.toString())
                             .addOnSuccessListener {
                                 Toast.makeText(this, "Session booked successfully", Toast.LENGTH_SHORT).show()
                                 binding.dateLabel.text = ""
+                                date =""
                                 myRef1 = database.getReference("Sessions")
                             }
                             .addOnFailureListener {
@@ -97,6 +101,7 @@ class BookSession : AppCompatActivity() {
             }
         }
     }
+
 
     private fun handleBackButtonClick() {
         val currentUser = userId.currentUser

@@ -32,7 +32,7 @@ class ViewAllSessions : AppCompatActivity() {
                 for (childSnapshot in dataSnapshot.children) {
                     val key = childSnapshot.key
                     val sessionData = childSnapshot.value as Map<String, Any>?
-                    val name = sessionData?.keys
+                    val name = sessionData?.values
 
 
                     if (name != null) {
