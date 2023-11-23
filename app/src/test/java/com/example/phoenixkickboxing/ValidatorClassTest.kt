@@ -10,11 +10,14 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class ValidatorClassTest{
 
+    @Test
+    fun whenInputIsValidLogin() {
+        assertThat(ValidatorClass.validateLoginInput("username", "password"))
+    }
 
     @Test
-    fun whenInputIsValidLogin(user:String, pass:String){
-        val result = ValidatorClass.validateLoginInput(user,pass);
-        assertThat(result).isEqualTo(true)
+    fun whenInputIsValidBooking() {
+        assertThat(ValidatorClass.validateBookingInput("2023/11/23", "user"))
     }
 
 }

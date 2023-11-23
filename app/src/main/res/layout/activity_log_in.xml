@@ -113,6 +113,7 @@
                 android:id="@+id/btnGoToRegister"
                 android:layout_width="140dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="35dp"
                 android:text="Register"
                 android:textSize="20dp"
                 android:layout_gravity="center"
